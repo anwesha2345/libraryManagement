@@ -1,0 +1,8 @@
+Mongo Atlas
+UserName: aquatechdevasp@gmail.com
+Passowrd: Aqua@123!
+
+DB
+USERNAME:-budseeker
+PASSOWRD:budseeker@123
+Con:mongodb+srv://budseeker:budseeker@123@cluster0.fuffr.mongodb.net/budseeker_db

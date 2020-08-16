@@ -1,0 +1,20 @@
+<body>
+      <div class="container">
+        <div class="card">
+        <form [formGroup]="loginDetails" (ngSubmit)="loginForm(loginDetails.value)">
+          
+          <div class="form-input">
+          <b> <input type="text"  name="text" placeholder="Username" formControlName="email"/> </b> 
+          </div>
+          <div class="form-input">
+          <b> <input type="password" name="password" placeholder="************" formControlName="password"/></b>
+          </div>
+          <br>
+          <b><input type="submit"  value="LOGIN" class="btn-login"/>
+            <!-- <button type="submit"  value="LOGIN" class="btn-login"></button> -->
+          </b>
+          <br><p class="spans">Forget Password ?</p>
+        </form>
+      </div>
+    </div>
+  </body>

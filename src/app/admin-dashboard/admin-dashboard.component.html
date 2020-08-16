@@ -1,0 +1,12 @@
+<form [formGroup]="bookForm" (ngSubmit)="onFormSubmit(bookForm.value)">
+<div class="col-lg-10">
+    <ng-multiselect-dropdown  
+    [data]="all_books" [placeholder]="'select books'"
+    formControlName="selectedItems" [settings]="dropdownSettings"
+    (onSelect)="onItemSelect($event)"
+    (onSelectAll)="onSelectAll($event)"
+    [disabled]="disabled">
+    </ng-multiselect-dropdown>
+  </div> 
+
+</form>
