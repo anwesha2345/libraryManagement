@@ -1,12 +1,36 @@
-<form [formGroup]="bookForm" (ngSubmit)="onFormSubmit(bookForm.value)">
-<div class="col-lg-10">
-    <ng-multiselect-dropdown  
-    [data]="all_books" [placeholder]="'select books'"
-    formControlName="selectedItems" [settings]="dropdownSettings"
-    (onSelect)="onItemSelect($event)"
-    (onSelectAll)="onSelectAll($event)"
-    [disabled]="disabled">
-    </ng-multiselect-dropdown>
-  </div> 
 
-</form>
+<div class="image">
+	<button type="button" class="btn btn-primary"><i class="far fa-user pr-2" aria-hidden="true"></i><a [routerLink]="['/booksView']">Add Books</a></button>
+	<form [formGroup]="bookForm" (ngSubmit)="onBookFormSubmit(bookForm.value)">
+		<div class="card">
+			<p class="design"><b>Books Borrowed To The User</b></p>
+			<div class="col-lg-10 dropdown-class">
+			    <ng-multiselect-dropdown  
+			    [data]="all_books" [placeholder]="'select books'"
+			    formControlName="selectedItems" [settings]="dropdownSettings"
+			    (onSelect)="onItemSelect($event)"
+			    (onSelectAll)="onSelectAll($event)"
+			    [disabled]="disabled">
+			    </ng-multiselect-dropdown>
+			 </div> 
+			 <br>
+			 <div>
+			 	<label for="items">Find User:</label>
+
+					<select type="select" formControlName="findUsers" class="user-class">
+					  <option>All Users</option>
+					  <option *ngFor="let alls of all_users" value="{{alls._id}}">
+					  	{{alls.first_name}}{{alls.last_name}}
+					  </option>
+					</select>
+			 </div>
+			 <br>
+			 <div>
+			 	<input type="date" class="dates" formControlName="date"/>
+			 </div>
+			<div>
+			  	<input type="submit" class="bookSubmitButton" value="Save Data"/>
+			</div>
+		</div>
+	</form>
+</div>

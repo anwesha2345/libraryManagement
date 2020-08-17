@@ -1,0 +1,68 @@
+<div class="imag2">
+<ngx-datatable class="dark" [rows]="rows" [columnMode]="'force'" 
+		 [headerHeight]="50" [footerHeight]="50"
+		        [rowHeight]="50" [scrollbarV]="true" [sorts]="[{prop: 'name', dir: 'desc'}]">
+		        <ngx-datatable-column name="Sl No.">
+		          <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+		            {{rowIndex + 1}}
+		          </ng-template>
+		        </ngx-datatable-column>
+		        <ngx-datatable-column name="name">
+		          <ng-template let-row="row"  let-rowIndex="rowIndex" ngx-datatable-cell-template>
+		           {{row.name}}
+		          </ng-template>
+		        </ngx-datatable-column>
+		      
+		        <ngx-datatable-column name="description">
+		          <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+		            {{row.description}}
+		          </ng-template>
+		        </ngx-datatable-column>
+		      
+		        <ngx-datatable-column name="author">
+		          <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+		          	{{row.author}}
+		          </ng-template>
+		        </ngx-datatable-column>  
+</ngx-datatable>
+<br>
+
+<div class="card">
+  <p class="book2">Book Details Add Form</p>
+    <form novalidate [formGroup]="formGroup" (ngSubmit)="onDynamicFormSubmit(formGroup.value)">
+      <div class="row">
+        <div class="col-xs-12">
+          <div style="margin-top:0px;" formGroupName="itemRows">
+            <ng-container *ngIf="formGroup.controls.itemRows != null">
+            <div *ngFor="let itemrow of formGroup.controls.itemRows.controls; let i =index"
+             [formGroupName]="i">
+             <div class="row">
+                <div class="col-md-2 form-group">
+                    <input type="text" placeholder="name" formControlName="name">
+                </div>
+                <div class="col-md-2 form-group">
+                  <input type="text" placeholder="author" formControlName="author">
+                </div>
+                <div class="col-md-2 form-group">
+                  <input type="text" placeholder="description" formControlName="description">
+                </div><br>
+                <div class="col-md-2 form-group">
+                  <button (click)="deleteRow(i)" class="btn btn-danger"> X </button>
+                </div>
+             </div>
+            </div>
+          </ng-container>
+          <div class="form-group" style="text-align:right">
+            <button type="button" (click)="addMoreRow()" [disabled]="formGroup.invalid"
+            class="btn btn-primary">Add More Row</button>
+          </div>
+          <br>
+          <div>
+            <button type="submit" mat-button color="primary" class="btn1">Submit</button> 
+          </div>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>
+</div>

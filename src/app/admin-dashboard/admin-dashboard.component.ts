@@ -12,6 +12,8 @@ import { from } from 'rxjs';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
+  displayedColumns: string[] = ['position', 'name', 'description', 'author'];
+  editing = {};
   books:any = [];
   all_books:any=[];
   selectedItems: any = [];
@@ -20,18 +22,29 @@ export class AdminDashboardComponent implements OnInit {
   disabled = false;
   ShowFilter = false;
   limitSelection = false;
+  dataSaved = false;
+  selected: any;
+  items:any=[];
+  rows: any = []; 
+  users: any;
+  all_users: any = [];
+  alls: any = [];
+  findUsers: any;
   
   constructor(private auth: AuthenticationService,
     private router: Router,
     private formbuilder: FormBuilder,
     private route: ActivatedRoute) { }
+    
 
   ngOnInit(): void {
+
     this.getAllBookValue();
+    this.getAllUserValue();
     this.bookForm = this.formbuilder.group({
-      id:'',
-      books:'',
-      selectedItems:''
+      selectedItems:'',
+      date:'',
+      findUsers:''
     })
 
     this.dropdownSettings = {
@@ -42,31 +55,32 @@ export class AdminDashboardComponent implements OnInit {
       unselectAllText: "UnSelect All",
       itemsShowLimit:3,
       allowSearchFilter: this.ShowFilter,
-    };
-    
+    }; 
   }
-  onItemSelect(event){
-
-  }
-  onSelectAll(event){
-
-  }
+  onItemSelect(item) {
+     
+    }
+    onSelectAll(items) {
+      
+    } 
 
   getAllBookValue(){
     this.auth.getAllBookDetailsData().subscribe((response: any)=>{
-      this.books = response;
-      
-      for(let i=0; i<this.books.data.length; i++){
-        this.all_books.push({
-          "id":this.books.data[i]._id,
-          "name":this.books.data[i].name
-        })
-      }
-      console.log(this.all_books)
+      this.all_books = response.books;  
     })
   }
 
-  onFormSubmit(value){
-
+  getAllUserValue(){
+    this.auth.getAllUsersValue().subscribe((response: any)=>{
+      this.all_users = response.data;
+    })
   }
+  onBookFormSubmit(value){
+    console.log(value)
+    this.auth.createBookUserDetails(value).subscribe((response: any) =>{
+        this.router.navigate(['/adminDashboard'])
+        
+      })
+  } 
+ 
 }

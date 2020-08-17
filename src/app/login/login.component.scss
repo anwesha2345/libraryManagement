@@ -8,6 +8,27 @@
 		border-color: orangered;
 		position: absolute;
 		margin-left: 420px;
-		
+		background-color:#FFA07A;
 		
 	}
+
+input[type="text"],input[type="password"]{
+	margin-top: 25px;
+	border-color: orangered;
+	padding: 3px;
+	
+}
+
+.btn-login{
+	padding: 10px 20px;
+	border: none;
+	background-color: orangered;
+	color: white;
+	margin-top: 72px;
+}
+
+.container{
+	height:655px; background-size:cover; width:auto;
+    background-image:url('../../assets/login.jpg');
+    background-position:50% 50%;
+}

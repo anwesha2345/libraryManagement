@@ -18,6 +18,9 @@ import { AdminSignUpComponent } from './admin-sign-up/admin-sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { BookAddComponent } from './book-add/book-add.component';
+import { UserAddComponent } from './user-add/user-add.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     UserSignUpComponent,
     AdminSignUpComponent,
     LoginComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    BookAddComponent,
+    UserAddComponent
 
     
   ],
@@ -38,7 +43,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgxDatatableModule
   ],
   providers: [AuthenticationService, AuthGuardService],
   bootstrap: [AppComponent]

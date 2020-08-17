@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 const User = require('../models/users');
 const Book = require('../models/book');
-const LiUser = require('../models/libraryUser');
+const LiUser = require('../models/libraryusers');
 var randomstring  = require('randomstring');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
@@ -81,7 +81,19 @@ var createBookUserDetails = async function(req,res,error){
 
 var findAllBooks = async function(req,res,error){
 	var bookDetails = await Book.find({});
-	res.status(200).json({"data":bookDetails})
+	var books = [];
+	for(let i=0; i<bookDetails.length; i++){
+		books.push({
+			"id":bookDetails[i]._id,
+			"name":bookDetails[i].name
+		})
+	}
+	res.status(200).json({books})
+}
+
+var findAllBooksValue = async function(req,res,error){
+	var bookDetails = await Book.find({});
+	res.status(200).json({bookDetails})
 }
 
 var findAllBookUser = async function(req,res,error){
@@ -90,5 +102,6 @@ var findAllBookUser = async function(req,res,error){
 }
 
 module.exports = {signUp:signUp , createBookDetails:createBookDetails,
- findAllBooks:findAllBooks, createBookUserDetails:createBookUserDetails, findAllBookUser:findAllBookUser};
+ findAllBooks:findAllBooks, createBookUserDetails:createBookUserDetails, 
+ findAllBookUser:findAllBookUser, findAllBooksValue:findAllBooksValue};
 

@@ -6,15 +6,17 @@ import {CustomerEditDetailsComponent} from './customer/customer-edit-details/cus
 import {CustomerViewDetailsComponent} from './customer/customer-view-details/customer-view-details.component';
 import {LoginComponent} from './login/login.component';
 import {AdminDashboardComponent} from './admin-dashboard/admin-dashboard.component';
+import {BookAddComponent} from './book-add/book-add.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'adminDashboard',pathMatch:'full'},
+  {path:'',redirectTo:'login',pathMatch:'full'},
   {path:'customerAdd', component:CustomerDetailsComponent},
   {path:'customerView', component:CustomerViewComponent},
   {path:'edit-customer-details/:id', component:CustomerEditDetailsComponent},
   {path:'view-individual-customer-details/:id', component:CustomerViewDetailsComponent},
   {path:'login', component:LoginComponent},
   {path:'adminDashboard', component:AdminDashboardComponent},
+  {path:'booksView', component:BookAddComponent},
 ];
 
 @NgModule({

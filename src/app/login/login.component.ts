@@ -28,7 +28,14 @@ export class LoginComponent implements OnInit {
   }
 
   loginForm(value){
-  
+    this.auth.Login(value).subscribe((response: any) =>{
+        var token = response.token
+        var token1= {token:token}
+        this.router.navigate(['/adminDashboard']);
+        
+    }) 
+
+
   }
 
 }

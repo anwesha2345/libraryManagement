@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken')
 const multer = require('multer');
 const User = require('../models/users');
 var authModel = require('../models/users');
+const Book = require('../models/book');
+const BookUser = require('../models/bookUser');
+const LiUser = require('../models/libraryusers')
 const { Users } = require('../models/users');
 var authController = require('../controllers/authentication');
 var authLogin = require('../controllers/authenticate');
@@ -43,9 +46,58 @@ router.get("/jwt-Login-api-authentication-check", authLogin.authJwt, async(req,r
 router.post("/create-book",authController.createBookDetails);
 router.post("/create-book-user",authController.createBookUserDetails);
 router.get("/get-all-books",authController.findAllBooks);
-router.get("/get-all-users",authController.findAllBookUser);
+//router.get("/get-all-users",authController.findAllBookUser);
+router.get("/get-all-books-value",authController.findAllBooksValue);
 
 router.post("/sign-up",authController.signUp);
+
+
+router.get("/get-all-users", async(req,res)=>{
+    var data = await LiUser.find({})
+    res.json({
+        success: true,
+        code:200,
+        data
+    })
+})
+router.post("/create-book-details", async(req,res)=>{
+    
+    for(let i=0; i<req.body.itemRows.length; i++){
+        var create_book = await Book.create({
+            name:req.body.itemRows[i].name,
+            author:req.body.itemRows[i].author,
+            description:req.body.itemRows[i].description
+        })
+    }
+    res.json({
+        success:true,
+        code:200,
+        "data":create_book
+    })
+})
+
+router.post("/create-all-book-user-details", async(req,res)=>{
+    for(let i=0; i<req.body.selectedItems.length; i++){
+        var bookUser = await BookUser.create({
+            lu_id:req.body.findUsers,
+            book_id:req.body.selectedItems[i].id,
+            dates:req.body.date
+        })    
+    } 
+    res.json({
+        success: true,
+        code:200,
+        bookUser
+    })
+})
+
+
+router.get("/get-book-users", async(req,res)=>{
+    await BookUser.find().populate('libraryusers').exec((err,BookUser)=>{
+        res.json(BookUser);
+    })
+    
+})
 
 
 

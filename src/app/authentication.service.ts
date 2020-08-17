@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router'
@@ -28,7 +28,7 @@ export interface TokenPayload {
 
 @Injectable()
 export class AuthenticationService {
-  private token: string
+  token: any;
   url1 = 'http://localhost:3500/login';
   url2 = 'http://localhost:3500/register';
   url3 = 'http://localhost:3500/add-customer-details';
@@ -38,9 +38,26 @@ export class AuthenticationService {
   url12 = 'http://localhost:3500/customer-delete';
   url13 = 'http://localhost:3500/get-all-books';
   url14 = 'http://localhost:3500/get-all-users';
-  
+  url15 = 'http://localhost:3500/get-all-books-value';
+  url16 = 'http://localhost:3500/create-book-details';
+  url17= 'http://localhost:3500/create-all-book-user-details';
+  loginUrl = 'http://localhost:3500/signIn';
+  loginUrl1 = 'http://localhost:3500/jwt-Login-api-authentication-check';
+
 
   constructor(private http: HttpClient, private router: Router) {}
+  Login(userDetails):Observable<any> 
+  {
+    return this.http.post(this.loginUrl,userDetails);
+  }
+
+
+  LoginJwt(userDetails):Observable<any> 
+  {
+  var  headers = new HttpHeaders().set('jwtoken', this.token);
+  return this.http.get(this.loginUrl1,{headers: headers});
+  }
+
 
   private saveToken(token: string): void {
     localStorage.setItem('usertoken', token)
@@ -141,5 +158,20 @@ export class AuthenticationService {
     return this.http.get(this.url14);
   }
 
+  getAllBook(){
+    return this.http.get(this.url15);
+  }
+
+  createBookDetails(books){
+    return this.http.post(this.url16, books)
+  }
+
+  createBookUserDetails(books){
+    return this.http.post(this.url17, books)
+  }
+
+  getAllUsersValue(){
+    return this.http.get(this.url14);
+  }
 
 }
